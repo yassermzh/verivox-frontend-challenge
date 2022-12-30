@@ -1,0 +1,12 @@
+<div class="sort">
+  <select [formControl]="sortBy">
+    <option *ngFor="let key of sortByKeys" [value]="key">
+      {{ key }}
+    </option>
+  </select>
+</div>
+<section class="list">
+  <article *ngFor="let tarif of tarifsSorted$ | async; let i = index">
+    <app-tarif-list-item [tarif]="tarif" [rowNum]="i + 1"></app-tarif-list-item>
+  </article>
+</section>

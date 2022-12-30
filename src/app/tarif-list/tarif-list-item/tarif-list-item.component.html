@@ -1,0 +1,37 @@
+<ng-container *ngIf="tarif">
+  <div class="row-number">{{ rowNum }}.</div>
+  <h2 class="name">
+    {{ tarif.name }}
+  </h2>
+
+  <div class="rates">
+    <div class="label">Download</div>
+    <div class="rate">
+      <div class="icon">↓</div>
+      <div class="amount">{{ tarif.downloadRate }}</div>
+      <div class="unit">Mbit/s</div>
+    </div>
+
+    <div class="label">Upload</div>
+    <div class="rate upload">
+      <div class="icon">↑</div>
+      <div class="amount">{{ tarif.uploadRate }}</div>
+      <div class="unit">Mbit/s</div>
+    </div>
+  </div>
+
+  <p class="description">
+    {{ tarif.description }}
+  </p>
+
+  <div class="price">{{ tarif.price | number }} €</div>
+
+  <a
+    class="link"
+    [title]="tarif.name + ' details'"
+    [routerLink]="['/tarifs', tarif.id]"
+  >
+    <span class="title">To Tarif</span>
+    <span class="icon">›</span>
+  </a>
+</ng-container>

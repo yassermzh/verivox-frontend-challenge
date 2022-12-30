@@ -1,0 +1,117 @@
+:host
+    border: 1px solid gray
+    padding: 8px 16px 8px 0px
+
+    display: grid
+    grid-template-areas: "row-number name rates price link"
+    grid-template-columns: auto 2fr 1fr 1fr 1.5em
+    column-gap: 8px
+    .row-number
+        grid-area: row-number
+    .name
+        grid-area: name
+    .rates
+        grid-area: rates
+    .price
+        grid-area: price
+    .description
+        grid-area: description
+    .link
+        grid-area: link
+
+    h2, p
+        margin: 0
+
+    .row-number
+        padding: 0 4px
+
+    .rates
+        .label
+            display: none
+
+        .rate
+            margin-bottom: 8px
+            width: fit-content
+            display: grid
+            grid-template-areas: "icon amount" "unit unit"
+            grid-template-columns: 1em 1fr
+            column-gap: 2px
+            row-gap: 4px
+            .icon
+                grid-area: icon
+            .unit
+                grid-area: unit
+            .amount
+                grid-area: amount
+
+            .icon
+                text-align: center
+            .amount
+                text-align: right
+            &.upload
+                display: none
+
+    .description
+        display: none
+
+    .price
+        justify-self: flex-end
+        font-weight: bold
+
+    .link
+        display: flex
+        text-decoration: none
+        border: 1px solid gray
+        align-items: center
+        justify-content: center
+        box-shadow: 2px 1px 1px gray
+        line-height: 1.5em
+        color: inherit
+        .title
+            padding-right: .5em
+            padding-top: 0.2em
+            display: none
+        .icon
+            line-height: 1.2em
+            font-size: 1.2em
+
+    @media (min-device-width: 768px) // tablet
+
+        grid-template-areas: "row-number name rates price" "row-number name rates link"
+        grid-template-columns: auto 1fr 1fr minmax(100px, 0.5fr)
+
+        .rates
+            .rate
+                grid-template-areas: "icon amount unit"
+                grid-template-columns: 2em 1fr 1fr
+                padding-right: 16px
+                border: 1px solid gray
+                border-top-right-radius: 10px
+                border-bottom-right-radius: 10px
+                .icon
+                    display: block
+                    border-right: 1px solid gray
+                &.upload
+                    display: grid
+        .link
+            align-self: center
+            .title
+                display: block
+        .price
+            align-self: center
+
+    @media (min-width:1025px) // desktop
+
+        grid-template-areas: "row-number name rates description price" "row-number name rates description link"
+        grid-template-columns: auto 1fr 1fr 1fr minmax(100px, 0.5fr)
+
+        .row-number
+            margin: -8px 0
+            border-right: 1px solid gray
+            display: flex
+            align-items: center
+        .rates
+            .label
+                display: block
+        .description
+            display: block
