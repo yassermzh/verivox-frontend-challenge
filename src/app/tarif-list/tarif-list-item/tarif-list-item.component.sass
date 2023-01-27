@@ -74,8 +74,10 @@
         .icon
             line-height: 1.2em
             font-size: 1.2em
+        &:hover, &:focus
+            background-color: lightgray
 
-    @media (min-device-width: 768px) // tablet
+    @media (min-width: 768px) // tablet
 
         grid-template-areas: "row-number name rates price" "row-number name rates link"
         grid-template-columns: auto 1fr 1fr minmax(100px, 0.5fr)
