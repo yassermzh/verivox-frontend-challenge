@@ -10,6 +10,11 @@
 - preserve scroll position on route change
 - added some aria-label for a11y
 
+also
+
+- added upload file functionality to set the list of tarifs! Not sure if that was what requested.
+- added zod to validate the json file!
+
 Tried to have few small commits this time.
 
 Thanks for reviewing the code.
