@@ -1,0 +1,58 @@
+[
+  {
+    "id": "id-1",
+    "name": "tarif 1",
+    "uploadRate": 41,
+    "downloadRate": 994,
+    "description": "harness holistic synergies",
+    "price": 109.27
+  },
+  {
+    "id": "id-2",
+    "name": "tarif 2",
+    "uploadRate": 45,
+    "downloadRate": 97,
+    "description": "e-enable global e-services",
+    "price": 170.97
+  },
+  {
+    "id": "id-3",
+    "name": "tarif 3",
+    "uploadRate": 37,
+    "downloadRate": 625,
+    "description": "maximize proactive eyeballs",
+    "price": 95.46
+  },
+  {
+    "id": "id-97",
+    "name": "tarif 97",
+    "uploadRate": 32,
+    "downloadRate": 162,
+    "description": "incubate rich supply-chains",
+    "price": 124.44
+  },
+  {
+    "id": "id-98",
+    "name": "tarif 98",
+    "uploadRate": 19,
+    "downloadRate": 229,
+    "description": "recontextualize granular interfaces",
+    "price": 99.81
+  },
+  {
+    "id": "id-99",
+    "name": "tarif 99",
+    "uploadRate": 99,
+    "downloadRate": 933,
+    "description": "syndicate proactive systems",
+    "price": 136.44
+  },
+  {
+    "id": "id-100",
+    "name": "tarif 100",
+    "uploadRate": 41,
+    "downloadRate": 955,
+    "description": "whiteboard out-of-the-box channels",
+    "price": 237.29
+  }
+]

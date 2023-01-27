@@ -6,6 +6,7 @@ import { TarifListComponent } from './tarif-list/tarif-list.component';
 import { TarifListItemComponent } from './tarif-list/tarif-list-item/tarif-list-item.component';
 import { TarifDetailsComponent } from './tarif-details/tarif-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UploadTarifsComponent } from './upload-tarifs/upload-tarifs.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TarifListComponent,
     TarifListItemComponent,
     TarifDetailsComponent,
+    UploadTarifsComponent,
   ],
   imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],

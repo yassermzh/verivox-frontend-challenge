@@ -1,15 +1,18 @@
 <h1 aria-label="List of items"></h1>
-<div class="sort">
-  <select
-    [formControl]="sortBy"
-    aria-label="Sort-by menu"
-    (change)="handleSortChange()"
-  >
-    <option *ngFor="let by of sortByKeys" [value]="by.key">
-      {{ by.value }}
-    </option>
-  </select>
-</div>
+<section class="actions">
+  <div class="sort">
+    <select
+      [formControl]="sortBy"
+      aria-label="Sort-by menu"
+      (change)="handleSortChange()"
+    >
+      <option *ngFor="let by of sortByKeys" [value]="by.key">
+        {{ by.value }}
+      </option>
+    </select>
+  </div>
+  <a routerLink="upload">Upload</a>
+</section>
 <section class="list">
   <article
     *ngFor="

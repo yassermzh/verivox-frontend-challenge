@@ -1,0 +1,11 @@
+<input
+  type="file"
+  class="file-input"
+  accept="application/JSON"
+  (change)="onFileSelected($event)"
+/>
+
+<p *ngIf="loading$ | async">loading...</p>
+<p>{{ state$ | async }}</p>
+
+<a routerLink="/tarifs">Go to list</a>
