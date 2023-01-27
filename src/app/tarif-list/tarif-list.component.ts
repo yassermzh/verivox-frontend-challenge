@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TrackByFunction } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { Tarif, TarifService } from '../tarifs.service';
@@ -42,5 +42,9 @@ export class TarifListComponent {
         }
       })
     );
+  }
+
+  trackById: TrackByFunction<Tarif> = (_index, item) => {
+    return item.id
   }
 }

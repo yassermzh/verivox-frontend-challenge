@@ -6,7 +6,7 @@
   </select>
 </div>
 <section class="list">
-  <article *ngFor="let tarif of tarifsSorted$ | async; let i = index">
+  <article *ngFor="let tarif of tarifsSorted$ | async; let i = index; trackBy:trackById ">
     <app-tarif-list-item [tarif]="tarif" [rowNum]="i + 1"></app-tarif-list-item>
   </article>
 </section>
