@@ -11,6 +11,8 @@ import {
 } from 'rxjs';
 import { SortByKey, SortByKeys, Tarif, TarifService } from '../tarifs.service';
 
+const SortByKeyInitial: SortByKey = 'empty';
+
 @Component({
   selector: 'app-tarif-list',
   templateUrl: './tarif-list.component.html',
@@ -22,8 +24,9 @@ export class TarifListComponent implements OnInit {
     value: v,
   }));
   tarifsSorted$!: Observable<Tarif[]>;
-  sortBy = new FormControl<keyof Tarif>('name');
+  sortBy = new FormControl<SortByKey>(SortByKeyInitial);
   page$!: Observable<number>;
+  sortBy$!: Observable<SortByKey>;
 
   constructor(
     private tarifsService: TarifService,
@@ -35,16 +38,16 @@ export class TarifListComponent implements OnInit {
     this.page$ = this.route.queryParams.pipe(
       map((params) => Number(params['page'] ?? 1))
     );
-    this.tarifsSorted$ = combineLatest([
-      this.sortBy.valueChanges.pipe(startWith('name')),
-      this.page$,
-    ]).pipe(
-      switchMap(([_sortBy, page]) => {
-        return this.tarifsService.getAll({
+    this.sortBy$ = this.route.queryParams.pipe(
+      map((params) => params['sortBy'] ?? SortByKeyInitial)
+    );
+    this.tarifsSorted$ = combineLatest([this.sortBy$, this.page$]).pipe(
+      switchMap(([sortBy, page]) =>
+        this.tarifsService.getAll({
           page,
-          sortBy: _sortBy as SortByKey,
-        });
-      })
+          sortBy,
+        })
+      )
     );
   }
 
@@ -65,7 +68,16 @@ export class TarifListComponent implements OnInit {
         to = action;
       }
 
-      this.router.navigate([], { queryParams: { page: to } });
+      this.router.navigate([], {
+        queryParams: { page: to },
+        queryParamsHandling: 'merge',
+      });
+    });
+  }
+
+  handleSortChange() {
+    this.router.navigate([], {
+      queryParams: { page: 1, sortBy: this.sortBy.value },
     });
   }
 }

@@ -29,7 +29,7 @@ const PAGE_SIZE = 5;
 export class TarifService {
   private tarifs: Tarif[] = MockedTarifs;
 
-  getAll({ page = 1, sortBy = 'name' }: { page: number; sortBy: SortByKey }) {
+  getAll({ page = 1, sortBy = 'empty' }: { page: number; sortBy: SortByKey }) {
     const from = (page - 1) * PAGE_SIZE;
     const sortedList = [...this.tarifs];
     switch (sortBy) {

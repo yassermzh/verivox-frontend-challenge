@@ -1,6 +1,10 @@
 <h1 aria-label="List of items"></h1>
 <div class="sort">
-  <select [formControl]="sortBy" aria-label="Sort-by menu">
+  <select
+    [formControl]="sortBy"
+    aria-label="Sort-by menu"
+    (change)="handleSortChange()"
+  >
     <option *ngFor="let by of sortByKeys" [value]="by.key">
       {{ by.value }}
     </option>
@@ -18,14 +22,14 @@
   </article>
   <nav class="pagination" *ngIf="page$ | async; let page">
     <ul>
-      <li [class.hidden]="page == 1">
-        <a (click)="handlePageChange('prev')" aria-label="Previous page"> < </a>
+      <li (click)="handlePageChange('prev')" [class.hidden]="page == 1">
+        <a aria-label="Previous page"> < </a>
       </li>
       <li>
         <a aria-label="current page"> {{ page }}</a>
       </li>
-      <li>
-        <a (click)="handlePageChange('next')" aria-label="Next page"> > </a>
+      <li (click)="handlePageChange('next')">
+        <a aria-label="Next page"> > </a>
       </li>
     </ul>
   </nav>
