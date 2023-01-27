@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import {MockedTarifs} from './mock-data'
 
 export type Tarif = {
   id: string;
@@ -9,33 +10,6 @@ export type Tarif = {
   description: string;
   price: number;
 };
-
-const MockedTarifs = [
-  {
-    id: 'id-1',
-    name: 'tarif 1',
-    uploadRate: 6,
-    downloadRate: 100,
-    description: 'this benefit',
-    price: 123.45,
-  },
-  {
-    id: 'id-2',
-    name: 'tarif 2',
-    uploadRate: 10,
-    downloadRate: 128,
-    description: 'that benefit',
-    price: 234.56,
-  },
-  {
-    id: 'id-3',
-    name: 'tarif 3',
-    uploadRate: 9,
-    downloadRate: 148,
-    description: 'this benefit',
-    price: 134.56,
-  },
-];
 
 @Injectable({
   providedIn: 'root',
