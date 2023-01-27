@@ -1,50 +1,71 @@
-import { Component, TrackByFunction } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
-import { Tarif, TarifService } from '../tarifs.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  combineLatest,
+  first,
+  map,
+  Observable,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { SortByKey, SortByKeys, Tarif, TarifService } from '../tarifs.service';
 
 @Component({
   selector: 'app-tarif-list',
   templateUrl: './tarif-list.component.html',
   styleUrls: ['./tarif-list.component.sass'],
 })
-export class TarifListComponent {
-  sortByKeys = [
-    'name',
-    'price',
-    'downloadRate',
-    'uploadRate',
-  ] as (keyof Tarif)[];
-
-  tarifsSorted$: Observable<Tarif[]>;
+export class TarifListComponent implements OnInit {
+  sortByKeys = Object.entries(SortByKeys).map(([k, v]) => ({
+    key: k,
+    value: v,
+  }));
+  tarifsSorted$!: Observable<Tarif[]>;
   sortBy = new FormControl<keyof Tarif>('name');
+  page$!: Observable<number>;
 
-  constructor(tarifsService: TarifService) {
+  constructor(
+    private tarifsService: TarifService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.page$ = this.route.queryParams.pipe(
+      map((params) => Number(params['page'] ?? 1))
+    );
     this.tarifsSorted$ = combineLatest([
-      tarifsService.getAll(),
       this.sortBy.valueChanges.pipe(startWith('name')),
+      this.page$,
     ]).pipe(
-      map(([tarifs, value]) => {
-        const sortBy = value as keyof Tarif;
-        switch (sortBy) {
-          case 'name':
-            return tarifs.sort((tarif1, tarif2) =>
-              tarif1.name.localeCompare(tarif2.name)
-            );
-          case 'price':
-          case 'downloadRate':
-          case 'uploadRate':
-            return tarifs.sort(
-              (tarif1, tarif2) => tarif1[sortBy] - tarif2[sortBy]
-            );
-          default:
-            return tarifs;
-        }
+      switchMap(([_sortBy, page]) => {
+        return this.tarifsService.getAll({
+          page,
+          sortBy: _sortBy as SortByKey,
+        });
       })
     );
   }
 
   trackById: TrackByFunction<Tarif> = (_index, item) => {
-    return item.id
+    return item.id;
+  };
+
+  handlePageChange(action: 'next' | 'prev') {
+    this.page$.pipe(first()).subscribe((page) => {
+      let to: number;
+
+      if (action === 'next') {
+        to = page + 1;
+        // maybe not forever!
+      } else if (action === 'prev') {
+        to = Math.max(1, page - 1);
+      } else {
+        to = action;
+      }
+
+      this.router.navigate([], { queryParams: { page: to } });
+    });
   }
 }

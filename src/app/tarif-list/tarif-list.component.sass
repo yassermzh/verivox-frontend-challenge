@@ -7,3 +7,22 @@
     .list
         display: grid
         row-gap: 8px
+
+    .pagination
+        ul
+            list-style: none
+            padding: 0
+            display: grid
+            grid-template-columns: repeat(auto-fit, minmax(44px, auto))
+            justify-items: center
+            grid-gap: 8px
+            justify-content: center
+
+            li
+                padding: 0.5em
+                border: 1px solid lightgray
+                cursor: pointer
+                &.hidden
+                    visibility: hidden
+                &:hover
+                    background-color: lightgray

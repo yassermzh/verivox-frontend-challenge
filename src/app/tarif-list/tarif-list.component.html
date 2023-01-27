@@ -1,13 +1,32 @@
 <h1 aria-label="List of items"></h1>
 <div class="sort">
   <select [formControl]="sortBy" aria-label="Sort-by menu">
-    <option *ngFor="let key of sortByKeys" [value]="key">
-      {{ key }}
+    <option *ngFor="let by of sortByKeys" [value]="by.key">
+      {{ by.value }}
     </option>
   </select>
 </div>
 <section class="list">
-  <article *ngFor="let tarif of tarifsSorted$ | async; let i = index; trackBy:trackById ">
+  <article
+    *ngFor="
+      let tarif of tarifsSorted$ | async;
+      let i = index;
+      trackBy: trackById
+    "
+  >
     <app-tarif-list-item [tarif]="tarif" [rowNum]="i + 1"></app-tarif-list-item>
   </article>
+  <nav class="pagination" *ngIf="page$ | async; let page">
+    <ul>
+      <li [class.hidden]="page == 1">
+        <a (click)="handlePageChange('prev')" aria-label="Previous page"> < </a>
+      </li>
+      <li>
+        <a aria-label="current page"> {{ page }}</a>
+      </li>
+      <li>
+        <a (click)="handlePageChange('next')" aria-label="Next page"> > </a>
+      </li>
+    </ul>
+  </nav>
 </section>
