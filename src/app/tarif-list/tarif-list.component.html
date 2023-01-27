@@ -1,5 +1,6 @@
+<h1 aria-label="List of items"></h1>
 <div class="sort">
-  <select [formControl]="sortBy">
+  <select [formControl]="sortBy" aria-label="Sort-by menu">
     <option *ngFor="let key of sortByKeys" [value]="key">
       {{ key }}
     </option>
